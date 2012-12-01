@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	 
+	<title>NC ChatterBox</title>
+	 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<!--link type="text/css" rel="stylesheet" href="style.css"-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script>
+		$(function(){
+			window.WebSocket = window.WebSocket || window.MozWebSOcket;
+
+			var connection = new WebSocket('ws:10.1.0.195:1111');
+			connection.onopen = function(){
+				//conneciton is open
+			};
+
+		    connection.onmessage = function (message) {
+		        try {
+			    	$("#chatterbox").append(message.data + '<br/>');
+		        } 
+		        catch (e) {
+		            console.log('This doesn\'t look like a valid JSON: ', message.data);
+		            return;
+		        }
+		        // handle incoming message
+		    };
+
+			$("#inChat").keypress(function(e){
+				if(e.which == 13){
+					var msg = $(this).val();
+					connection.send(msg);
+				
+
+					$("#inChat").val("");
+				}
+			  });
+
+			
+		});
+	</script>
+	 <style>
+	 	#chatterbox
+	 	{
+	 		width:500px;
+	 		height:300px;
+	 		border:solid 1px;
+	 	}
+	 	#inChat
+	 	{
+	 		width:500px;
+	 	}
+	 </style>
+	</head>
+	 
+	<body>
+		<h1>Welcome to NC ChatterBox!</h1>
+		<input type="text" id="inChat" /><br/><br/>
+	 	<div id="chatterbox">
+
+	 	</div>
+	</body>
+</html>
