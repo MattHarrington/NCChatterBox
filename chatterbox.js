@@ -1,7 +1,7 @@
 var socket = require('websocket').server;
 var http = require('http');
 var fs = require('fs');
-
+var MessageStack = require('messagestack.js');
 
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -11,6 +11,8 @@ function htmlEntities(str) {
 function getRandomHexColor () {
     return 'rgb(' + (Math.floor(Math.random() * 255) + ',') + (Math.floor(Math.random() * 255) + ',') + (Math.floor(Math.random() * 255) + '') + ')';
 }
+
+var messageStack = new MessageStack(20);
 
 var server = http.createServer(function(request, response){
 	//keep it simple, just return one page no mater what...
@@ -57,6 +59,7 @@ socketServer.on('request', function(request){
 				else
 				{
 					console.log(message.utf8Data);
+					messageStack.push(message);
 					for(var i=0;i<clients.length;i++){
 						clients[i].sendUTF(userName + ': <span style="color:' + userColor + '">' + message.utf8Data + '</span>');
 					}
