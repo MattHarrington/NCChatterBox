@@ -2,19 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	 
-	<title>NC ChatterBox</title>
-	 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<!--link type="text/css" rel="stylesheet" href="style.css"-->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Discover More on Chat Feeder</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,400italic,600italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="stylesheets/foundation.css">  
+  <link rel="stylesheet" href="stylesheets/app.css">
+
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.simplemodal.1.4.3.min.js"></script>
+	  <script src="javascripts/modernizr.foundation.js"></script>
 	<script>
 		$(function(){
 			window.WebSocket = window.WebSocket || window.MozWebSOcket;
 
-			var connection = new WebSocket('ws:10.1.0.195:1111');
+			//var connection = new WebSocket('ws:10.1.0.195:1111');
+			var connection = new WebSocket('ws:127.0.0.1:1111');
 			connection.onopen = function(){
 				//conneciton is open
 			};
@@ -34,51 +41,306 @@
 
 			$(".inChat").keypress(function(e){
 				if(e.which == 13){
-					
-
 					var msg = $(this).val();
 					connection.send(msg);
 				
 					$(this).val("");
-
+					var key="B2B7f47katatJT4XvgogME9%2BWFlcG2c9lVm8tF7q9DM%3d";
+					var bingUrl = "http://api.search.live.net/json.aspx?&Appid" + key + "&query=" + msg + " &sources=web+image";  	
+					$.ajax({
+						type: "GET",
+						url: bingUrl,
+						dataType: "jsonp",
+						sucess: function(response){
+							alert(response);
+						}
+					}).done(function(data){
+						alert(data);
+					});
 					
 					$.modal.close();
-$("#EnterName").hide();
+					$("#EnterName").hide();
 				}
 			  });
 
 			
 		});
 	</script>
-	 <style>
-	 	#chatterbox
-	 	{
-	 		width:500px;
-	 		height:300px;
-	 		border:solid 1px;
-	 	}
-	 	#inChat
-	 	{
-	 		width:500px;
-	 	}
-	 	#EnterName
-	 	{
-	 		background:grey;
-	 		width:500px;
-	 		height:100px;
-	 	}
-	 </style>
 	</head>
 	 
-	<body>
-		<h1>Welcome to NC ChatterBox!</h1>
-		<input type="text" id="inChat" class="inChat" /><br/><br/>
-	 	<div id="chatterbox">
+<body>
+	<div class="masthead">
+	  <div class="row masthead">
+	    <div class="twelve columns">
+	      <h2>Chat Feeder</h2>
+	    </div>
+	  </div>
+	</div>
 
-	 	</div>
+  	<div class="row main-content">
+		<div class="three columns chatter-wrap mobile-two">
+			<div class="chatter">
+				<textarea id="inChat" class="inChat" placeholder="..."></textarea>
+				<div id="chatterbox" class="chat-roll">
 
-	 	<div id="EnterName">
+				</div>
+			</div>
+		</div>
+		<div class="nine columns mobile-two">
+			
+			<div class="row feed-grid">
+        <div class="four columns">
+					<div class="row">
+						<div class="twelve columns">
+	            <a href="#" class="pos-1 ">
+								<img src="images/pos-1.png" class="sizer">
+								<div class="details-wrapper" style="background: url(https://news.google.com/news/tbn/sVneER8L3BkJ/6.jpg)">
+									<div class="details">
+										<div class="location">
+											<h4>Snow hits Lake Tahoe-Ski resorts prepare for openings; Boreal ...</h4>
+										</div>
+										<div class="excerpt">
+											<p>View slideshow: Lake Tahoe ski resorts prepare for openings. Boreal will open on Saturday at 3:30 pm and remain open that evening until 9 ...</p>
+										</div>
+									</div>
+								</div>
+							</a>
+	            <a href="#" class="pos-2 sm">
+								<img src="images/pos-2.png" class="sizer">
+								<div class="details-wrapper" style="background: url(http://ts2.mm.bing.net/th?id=I.4722626573568405&pid=1.7&w=229&h=149&c=7&rs=1)">
+									<div class="details">
+										<div class="location">
+											<h4>Dog = sick, no vet till morn. - Penny Arcade Forums</h4>
+										</div>
+										<div class="excerpt">
+											<p>My miniature fox terrier lil homie is sick. ... Our new Indie Games subforum is now open for business in G&T. Go and check it out, you might land a code for a free game.</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+          </div>
+        </div>
+				<div class="eight columns">
+					<div class="row">
+						<div class="six columns">
+	            <a href="#" class="pos-3 sm">
+								<img src="images/pos-3.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Boreal Mountain Resort - Boreal - Truckee, CA - Lake Tahoe ...</h4>
+										</div>
+										<div class="excerpt">
+											<p>Boreal Mountain Ski Resort is the closest ski area to Sacramento, easiest resort to get to directly off Interstate 80, and the most affordable snowboard terrain park ...</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="six columns">			
+	            <a href="#" class="pos-4 sm">
+								<img src="images/pos-4.png" class="sizer">
+								<div class="details-wrapper" style="background: url(http://ts2.mm.bing.net/th?id=I.4536787672367281&pid=1.7&w=232&h=151&c=7&rs=1)">
+									<div class="details">
+										<div class="headline">
+											<h4>Big Sky Cafe</h4>
+										</div>
+										<div class="excerpt">
+											<p>Get a great gift card deal! A winter Farmers Market will be next door; Our Rosemary & Red Wine Pot Roast will warm your soul! It's brunch time! Facebook Twitter</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="twelve columns">			
+	            <a href="#" class="pos-5">
+								<img src="images/pos-5.png" class="sizer">
+								<div class="details-wrapper" style="background: url(http://ts4.mm.bing.net/th?id=H.4677121413546439&pid=1.7&w=202&h=141&c=7&rs=1)">
+									<div class="details">
+										<div class="location">
+											<h4>In my class i love a girl.How i know she loves me? …</h4>
+											<div class="excerpt">
+												<p>Feb 16, 2008 · Best Answer: What is baffling me is, without knowing her how on earth you could love her? Do you know the difference between love …</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="twelve columns">			
+	            <a href="#" class="pos-6">
+								<img src="images/pos-5.png" class="sizer">
+								<div class="details-wrapper" style="background: url(http://global.fncstatic.com/static/managed/img/fn2/video/112912_411_lohan_640.jpg)">
+									<div class="details">
+										<div class="location">
+											<h4>Lindsay Lohan was drunk, on vodka bender when she allegedly punched woman in club, reports say</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row feed-grid">
+				<div class="eight columns">
+					<div class="row">
+						<div class="six columns">
+	            <a href="#" class="pos-3 sm">
+								<img src="images/pos-3.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Position Seven</h4>
+										</div>
+										<div class="excerpt">
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="six columns">			
+	            <a href="#" class="pos-4 sm">
+								<img src="images/pos-4.png" class="sizer">
+								<div class="details-wrapper" style="background: url(http://timesofindia.indiatimes.com/thumb/msid-17428943,width-400,resizemode-4/Cheese.jpg)">
+									<div class="details">
+										<div class="headline">
+											<h4>Position Eight</h4>
+										</div>
+										<div class="excerpt">
+											<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="twelve columns">			
+	            <a href="#" class="pos-5">
+								<img src="images/pos-5.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Position Nine</h4>
+											<div class="excerpt">
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="twelve columns">			
+	            <a href="#" class="pos-6">
+								<img src="images/pos-5.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Position Ten</h4>
+											<div class="excerpt">
+											</div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="four columns">
+					<div class="row">
+						<div class="twelve columns">
+	            <a href="#" class="pos-1 ">
+								<img src="images/pos-1.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Sartori Cheese Presented Thirteen Medals at 2012 World Cheese ...</h4>
+										</div>
+										<div class="excerpt">
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+										</div>
+									</div>
+								</div>
+							</a>
+	            <a href="#" class="pos-2 sm">
+								<img src="images/pos-2.png" class="sizer">
+								<div class="details-wrapper">
+									<div class="details">
+										<div class="location">
+											<h4>Position Twelve</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+          </div>
+        </div>
+			</div>
+		
+		</div>
+  </div>
+
+  
+  
+<!--
+  <div class="row">
+    <div class="twelve columns">
+      <h4>Reveal</h4>
+      <p><a href="#" data-reveal-id="exampleModal" class="button">Example modal</a></p>
+    </div>
+  </div>
+-->  
+  <div id="exampleModal" class="reveal-modal">
+    <h4>This is a modal.</h4>
+    <p>
+      Reveal makes these very easy to summon and dismiss. The close button is simple an anchor with a unicode 
+      character icon and a class of <code>close-reveal-modal</code>. Clicking anywhere outside the modal will 
+      also dismiss it.
+    </p>
+    <a class="close-reveal-modal">×</a>
+  </div>
+  
+  	 	<div id="EnterName" style='width:350px;background-color:white;border-radius:15px;height:70px;padding:10px;'>
 	 		Welcome to ChatterBox!  Please enter your name: <input id="UserName" class="inChat" type="text" />
 	 	</div>
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  
+  <script src="javascripts/jquery.js"></script>
+  
+  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  
+  <script src="javascripts/jquery.foundation.forms.js"></script>
+  
+  <script src="javascripts/jquery.foundation.reveal.js"></script>
+  
+  <script src="javascripts/jquery.foundation.navigation.js"></script>
+  
+  <script src="javascripts/jquery.foundation.buttons.js"></script>
+  
+  <script src="javascripts/jquery.foundation.tooltips.js"></script>
+  
+  <script src="javascripts/jquery.foundation.accordion.js"></script>
+  
+  <script src="javascripts/jquery.placeholder.js"></script>
+  
+  <script src="javascripts/jquery.foundation.alerts.js"></script>
+  
+  <script src="javascripts/jquery.foundation.clearing.js"></script>
+  
+  -->
+  
+  <!-- Included JS Files (Compressed)
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script> -->
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+
 	</body>
 </html>

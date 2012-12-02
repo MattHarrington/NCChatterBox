@@ -1,0 +1,179 @@
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Media Queries
+*/
+
+
+/* -----------------------------------------
+   Main
+----------------------------------------- */
+.masthead {
+	background: #4e999a;
+	margin-bottom: 30px;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+}
+.masthead h2 {
+	color: #fff;
+}
+.main-content {
+	padding-top: 95px;
+	position: relative;
+	z-index: 50;
+}
+.chatter {
+	top: 95px;
+	width: 23%;
+	position: fixed;
+}
+.chat-roll {
+	padding: 2px;
+	border: 1px solid #eee;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.chat-roll div {
+	padding: 10px;
+}
+.chat-roll div:nth-child(even) {
+	background: #f2f2f2;
+}
+.chat-roll p {
+	border-bottom: 1px solid #eee;
+	padding: 0 0 5px;
+	margin-bottom: 5px;
+}
+.chat-roll div p:last-child {
+	border-bottom: none;
+}
+.chat-roll em {
+	padding-right: 5px;
+	clear: both;
+	display: block;
+}
+.chat-roll div:nth-child(even) em {
+	color: #ff6600;
+}
+.chat-roll div:nth-child(odd) em {
+	color: #4e999a;
+}
+
+.row.feed-grid a {
+	display: block;
+	position: relative;
+	margin-bottom: 20px;
+	color: #ccc;
+	overflow: hidden;
+	-webkit-transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-ms-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
+}
+.feed-grid a:hover {
+	color: #444;
+}
+.row.feed-grid img { 
+}
+.row.feed-grid a .details-wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	opacity: 1;
+	background-size: cover !important; 
+	-webkit-transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-ms-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
+}
+.details-wrapper h4 {
+	margin: 0;
+	color: #fff;
+	font-weight: 400;
+	-webkit-transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-ms-transition: all 150ms ease-in-out;
+	-o-transition: all 150ms ease-in-out;
+	transition: all 150ms ease-in-out;
+}
+.details-wrapper:hover h4 {
+	color: #333;
+}
+.details-wrapper .details {
+	padding: 8px;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0, .75);
+	-webkit-transition: background 150ms ease-in-out;
+	-moz-transition: background 150ms ease-in-out;
+	-ms-transition: background 150ms ease-in-out;
+	-o-transition: background 150ms ease-in-out;
+	transition: background 150ms ease-in-out;
+}
+.details-wrapper .details:hover {
+	padding: 8px;
+	height: 100%;
+	width: 100%;
+	background: rgba(255, 255, 255, .75);
+}
+.row.feed-grid a .excerpt {
+	padding: 10px 0;
+	clear: both;
+	display: none;
+}
+
+
+/* -----------------------------------------
+   Media Queries
+----------------------------------------- */
+
+@media only screen and (max-width: 767px) {
+	.chatter {
+		width: 48%;
+	}
+	.row.feed-grid a {
+		margin-bottom: 10px;
+	}
+	.row.feed-grid a .details-wrapper {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		top: 0;
+		left: 0;
+		overflow: visible;
+		opacity: 1;
+		-webkit-transition: all 150ms ease-in-out;
+		-moz-transition: all 150ms ease-in-out;
+		-ms-transition: all 150ms ease-in-out;
+		-o-transition: all 150ms ease-in-out;
+		transition: all 150ms ease-in-out;
+	}
+	.feed-grid img.sizer {
+		display: none;
+	}
+	.feed-grid h4 {
+		font-size: 16px;
+	}
+	.row.feed-grid a .excerpt {
+		padding: 10px 0 0;
+	}
+	.feed-grid p {
+		font-size: 12px;
+		line-height: 1.3;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.feed-grid h4 {
+		font-size: 18px;
+	}
+}
