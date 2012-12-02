@@ -1,6 +1,8 @@
 var socket = require('websocket').server;
 var http = require('http');
 var fs = require('fs');
+var restify = require('restify');
+var path = require('path');
 
 
 function htmlEntities(str) {
@@ -15,14 +17,41 @@ function getRandomHexColor () {
 var server = http.createServer(function(request, response){
 	//keep it simple, just return one page no mater what...
 	console.log("Request made for URL: " + request.url)
-	fs.readFile('./index.html', function (err, data) {
-	    if (err) {
-	        throw err;
-	    }
-	    response.writeHeader(200,{"Content-Type":"text/html"});
-	    response.write(data);
-	    response.end();
-	});
+    var filePath = '.' + request.url;
+    if (filePath == './')
+        filePath = './index.html';
+         var extname = path.extname(filePath);
+
+    var contentType = 'text/html';
+    switch (extname) {
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.css':
+            contentType = 'text/css';
+            break;
+    }
+
+    fs.exists(filePath, function(exists) {
+     
+        if (exists) {
+            fs.readFile(filePath, function(error, content) {
+                if (error) {
+                	console.log("No page found. Error: " + error)
+                    response.writeHead(500);
+                    response.end();
+                }
+                else {
+                    response.writeHead(200, { 'Content-Type': contentType });
+                    response.end(content, 'utf-8');
+                }
+            });
+        }
+        else {
+            response.writeHead(404);
+            response.end();
+        }
+    });
 });
 
 server.listen(1111,function(){
@@ -48,7 +77,7 @@ socketServer.on('request', function(request){
 				if(userName === false){
 					userName = htmlEntities(message.utf8Data);
 					userColor = getRandomHexColor();
-					var welcome = '<b>User <span style="color:' + userColor + '">' + userName + '</span> has joined the room!</b>';
+					var welcome = '<b>User <span style="color:' + userColor + '">' + htmlEntities(userName) + '</span> has joined the room!</b>';
 					console.log(welcome);
 					for(var i=0;i<clients.length;i++){
 						clients[i].sendUTF(welcome);
@@ -58,7 +87,7 @@ socketServer.on('request', function(request){
 				{
 					console.log(message.utf8Data);
 					for(var i=0;i<clients.length;i++){
-						clients[i].sendUTF(userName + ': <span style="color:' + userColor + '">' + message.utf8Data + '</span>');
+						clients[i].sendUTF(userName + ': <span style="color:' + userColor + '">' + htmlEntities(message.utf8Data) + '</span>');
 					}
 				}
 			}

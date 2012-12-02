@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	 
@@ -9,7 +8,8 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<!--link type="text/css" rel="stylesheet" href="style.css"-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.simplemodal.1.4.3.min.js"></script>
 	<script>
 		$(function(){
 			window.WebSocket = window.WebSocket || window.MozWebSOcket;
@@ -18,6 +18,8 @@
 			connection.onopen = function(){
 				//conneciton is open
 			};
+
+			$( "#EnterName" ).modal();
 
 		    connection.onmessage = function (message) {
 		        try {
@@ -30,13 +32,18 @@
 		        // handle incoming message
 		    };
 
-			$("#inChat").keypress(function(e){
+			$(".inChat").keypress(function(e){
 				if(e.which == 13){
+					
+
 					var msg = $(this).val();
 					connection.send(msg);
 				
+					$(this).val("");
 
-					$("#inChat").val("");
+					
+					$.modal.close();
+$("#EnterName").hide();
 				}
 			  });
 
@@ -54,14 +61,24 @@
 	 	{
 	 		width:500px;
 	 	}
+	 	#EnterName
+	 	{
+	 		background:grey;
+	 		width:500px;
+	 		height:100px;
+	 	}
 	 </style>
 	</head>
 	 
 	<body>
 		<h1>Welcome to NC ChatterBox!</h1>
-		<input type="text" id="inChat" /><br/><br/>
+		<input type="text" id="inChat" class="inChat" /><br/><br/>
 	 	<div id="chatterbox">
 
+	 	</div>
+
+	 	<div id="EnterName">
+	 		Welcome to ChatterBox!  Please enter your name: <input id="UserName" class="inChat" type="text" />
 	 	</div>
 	</body>
 </html>
